@@ -12,9 +12,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
     func configureView() {
-        // Update the user interface for the detail item.
         if let joke = detailItem {
             if let label = detailDescriptionLabel {
                 label.text = joke.content
@@ -32,18 +30,10 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     var detailItem: Joke? {
         didSet {
-            // Update the view.
             configureView()
         }
     }
-
-
 }
 

@@ -11,6 +11,9 @@ import UIKit
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
+    
+    @IBOutlet var popOver: UIView!
+    
     var jokesArray = [Joke]()
     var jokesDictionary = [String: String]()
     
@@ -33,6 +36,10 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        self.popOver.layer.cornerRadius = 20
+        self.popOver.layer.borderWidth = 0.8
+        self.popOver.layer.borderColor = UIColor.black.cgColor
+        
         jokesDictionary = saveData.object(forKey: "JokesDictionary") as? [String: String] ?? [String: String]()
         for (title, content) in jokesDictionary {
             let joke = Joke()
@@ -42,6 +49,10 @@ class MasterViewController: UITableViewController {
         }
         
         setEditing(false, animated: true)
+        
+        if (jokesArray.count == 0) {
+            displayPopOver(show: true)
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -88,7 +99,7 @@ class MasterViewController: UITableViewController {
                             attemptCount = 0
                             let alert = UIAlertController(title: "No more jokes!", message: "There are no more unique jokes at this time. Please try again later.", preferredStyle: .alert)
                             
-                            alert.addAction(UIAlertAction(title: "Okay, no problem", style: .default, handler: nil))
+                            alert.addAction(UIAlertAction(title: "OK, got it", style: .default, handler: nil))
                             
                             self.present(alert, animated: true)
                             return
@@ -135,6 +146,23 @@ class MasterViewController: UITableViewController {
             }
         }
     }
+    
+    func displayPopOver(show: Bool) {
+        if (show) {
+            self.view.addSubview(popOver)
+            popOver.center = CGPoint(x: self.view.center.x, y: 70)
+            self.tableView.alwaysBounceVertical = false
+            self.view.bringSubview(toFront: popOver)
+        } else {
+            self.popOver.removeFromSuperview()
+            self.tableView.alwaysBounceVertical = true
+        }
+    }
+    
+    @IBAction func popOverCloseBtn(_ sender: Any) {
+        displayPopOver(show: false)
+    }
+    
 
     // MARK: - Table View
 
@@ -167,7 +195,5 @@ class MasterViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
-
 }
 

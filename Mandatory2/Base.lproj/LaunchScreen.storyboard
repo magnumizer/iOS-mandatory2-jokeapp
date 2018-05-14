@@ -25,7 +25,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smiley.png" translatesAutoresizingMaskIntoConstraints="NO" id="CPx-Fd-BTg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smiley.png" translatesAutoresizingMaskIntoConstraints="NO" id="CPx-Fd-BTg">
                                 <rect key="frame" x="43" y="178" width="289" height="212"/>
                             </imageView>
                         </subviews>
